@@ -1,4 +1,4 @@
-package ss6_Static.student;
+package ss6_Static.Student;
 
 public class TestClass {
     public static void main(String[] args) {

@@ -58,4 +58,16 @@ public class Candidate {
     public void setEnglish(double english) {
         this.english = english;
     }
+
+    @Override
+    public String toString() {
+        return "Candidate{" +
+                "Id=" + Id +
+                ", name='" + name + '\'' +
+                ", date='" + date + '\'' +
+                ", math=" + math +
+                ", literature=" + literature +
+                ", english=" + english +
+                '}';
+    }
 }

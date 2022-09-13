@@ -1,4 +1,4 @@
-package ss6_Static.student;
+package ss6_Static.Student;
 
 public class Student {
     private String name="John";

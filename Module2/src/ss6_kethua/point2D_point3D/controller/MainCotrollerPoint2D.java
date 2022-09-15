@@ -1,6 +1,6 @@
-package ss7_kethua.point2D_point3D.controller;
+package ss6_kethua.point2D_point3D.controller;
 
-import ss7_kethua.point2D_point3D.model.Point2D;
+import ss6_kethua.point2D_point3D.model.Point2D;
 
 public class MainCotrollerPoint2D {
     public static void main(String[] args) {

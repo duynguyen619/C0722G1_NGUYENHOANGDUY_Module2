@@ -1,4 +1,4 @@
-package ss6_Static.AccessModifier;
+package ss5_Static.AccessModifier;
 
 public class Circle {
     private double radius = 1;

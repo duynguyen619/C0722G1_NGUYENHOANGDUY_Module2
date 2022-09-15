@@ -1,6 +1,6 @@
-package ss7_kethua.circle_cylinder.controller;
+package ss6_kethua.circle_cylinder.controller;
 
-import ss7_kethua.circle_cylinder.model.Cylinder;
+import ss6_kethua.circle_cylinder.model.Cylinder;
 
 public class MainControllerCylinder {
     public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package ss7_kethua.move.Model;
+package ss6_kethua.move.Model;
 
 import java.util.Arrays;
 

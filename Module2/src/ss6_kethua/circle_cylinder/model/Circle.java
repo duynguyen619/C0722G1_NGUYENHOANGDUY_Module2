@@ -1,4 +1,4 @@
-package ss7_kethua.circle_cylinder.model;
+package ss6_kethua.circle_cylinder.model;
 
 public class Circle {
     private double radius = 2.0;

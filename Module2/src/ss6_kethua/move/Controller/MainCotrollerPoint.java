@@ -1,7 +1,7 @@
-package ss7_kethua.move.Controller;
+package ss6_kethua.move.Controller;
 
-import ss7_kethua.move.Model.MoveablePoint;
-import ss7_kethua.move.Model.Point;
+import ss6_kethua.move.Model.MoveablePoint;
+import ss6_kethua.move.Model.Point;
 
 public class MainCotrollerPoint {
     public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package ss6_Static.AccessModifier;
+package ss5_Static.AccessModifier;
 
 public class TestCircle {
     public static void main(String[] args) {

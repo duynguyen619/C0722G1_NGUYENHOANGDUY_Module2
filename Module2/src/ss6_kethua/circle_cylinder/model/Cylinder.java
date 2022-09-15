@@ -1,4 +1,4 @@
-package ss7_kethua.circle_cylinder.model;
+package ss6_kethua.circle_cylinder.model;
 
 public class Cylinder extends Circle {
     private double heigth;

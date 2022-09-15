@@ -1,4 +1,4 @@
-package ss7_kethua.point2D_point3D.model;
+package ss6_kethua.point2D_point3D.model;
 
 import java.util.Arrays;
 

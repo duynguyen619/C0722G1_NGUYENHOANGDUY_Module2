@@ -1,4 +1,4 @@
-package ss6_Static.Student;
+package ss5_Static.Student;
 
 public class Student {
     private String name="John";

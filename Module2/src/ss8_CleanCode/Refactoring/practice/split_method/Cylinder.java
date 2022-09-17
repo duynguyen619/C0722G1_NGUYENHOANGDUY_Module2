@@ -1,4 +1,4 @@
-package ss7_CleanCode.Refactoring.practice.split_method;
+package ss8_CleanCode.Refactoring.practice.split_method;
 
 public class Cylinder {
     public static double getVolume(int radius, int height){

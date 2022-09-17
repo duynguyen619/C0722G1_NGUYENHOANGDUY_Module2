@@ -1,4 +1,4 @@
-package ss7_CleanCode.Refactoring.exercise;
+package ss8_CleanCode.Refactoring.exercise;
 
 public class TenisGame {
     public static final int LOVE = 0;

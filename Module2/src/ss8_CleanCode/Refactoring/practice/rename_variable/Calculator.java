@@ -1,4 +1,4 @@
-package ss7_CleanCode.Refactoring.practice.rename_variable;
+package ss8_CleanCode.Refactoring.practice.rename_variable;
 
 public class Calculator {
     public static final char ADDITION = '+';

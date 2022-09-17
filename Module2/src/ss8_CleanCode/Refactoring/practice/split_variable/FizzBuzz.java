@@ -1,4 +1,4 @@
-package ss7_CleanCode.Refactoring.practice.split_variable;
+package ss8_CleanCode.Refactoring.practice.split_variable;
 
 public class FizzBuzz {
     public static String fizzBuzz(int number){

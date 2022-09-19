@@ -10,4 +10,5 @@ public interface ITeacher {
     void search();
 
     void sortTeacher();
+    void editTeacher();
 }

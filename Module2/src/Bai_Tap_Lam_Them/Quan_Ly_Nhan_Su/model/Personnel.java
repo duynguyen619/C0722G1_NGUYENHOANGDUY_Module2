@@ -1,23 +1,25 @@
 package Bai_Tap_Lam_Them.Quan_Ly_Nhan_Su.model;
 
+import java.time.LocalDate;
+
 public class Personnel {
-    private int id;
+    private String id;
     private String name;
-    private String dateOfBirth;
+    private LocalDate dateOfBirth;
     private String gender;
 
-    public Personnel(int id, String name, String dateOfBirth, String gender) {
+    public Personnel(String id, String name, LocalDate dateOfBirth, String gender) {
         this.id = id;
         this.name = name;
         this.dateOfBirth = dateOfBirth;
         this.gender = gender;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -29,11 +31,11 @@ public class Personnel {
         this.name = name;
     }
 
-    public String getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(String dateOfBirth) {
+    public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
@@ -47,10 +49,10 @@ public class Personnel {
 
     @Override
     public String toString() {
-        return "Person{" +
-                "id=" + id +
+        return "Personnel{" +
+                "id='" + id + '\'' +
                 ", name='" + name + '\'' +
-                ", dateOfBirth='" + dateOfBirth + '\'' +
+                ", dateOfBirth=" + dateOfBirth +
                 ", gender='" + gender + '\'' +
                 '}';
     }

@@ -1,18 +1,28 @@
 package Bai_Tap_Lam_Them.Quan_Ly_Nhan_Su.model;
 
 
-public class Teacher extends Personnel {
-    private String specialize;
+import java.time.LocalDate;
 
-    public Teacher(int id, String name, String dateOfBirth, String gender, String specialize) {
+public class Teacher extends Personnel {
+    private String level;
+
+    public Teacher(String id, String name, LocalDate dateOfBirth, String gender, String specialize) {
         super(id, name, dateOfBirth, gender);
-        this.specialize = specialize;
+        this.level = specialize;
+    }
+
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
     }
 
     @Override
     public String toString() {
         return "Teacher{" +
-                "specialize='" + specialize + '\'' +
+                "specialize='" + level + '\'' +
                 "} " + super.toString();
     }
 }

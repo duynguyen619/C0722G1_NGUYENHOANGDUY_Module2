@@ -23,23 +23,6 @@ public class TeacherService implements ITeacher {
         teacherList.add(new Teacher("GV-1", "Hoàng Vân Anh", LocalDate.parse("1998-12-13"), "Nam", "Trung cấp"));
     }
 
-    public void sortTeacher() {
-        boolean swap = true;
-        for (int k = 0; k < teacherList.size() - 1 && swap; k++) {
-            swap = false;
-            for (int i = 0; i < teacherList.size() - 1 - k; i++) {
-
-                if (teacherList.get(i).getId().compareTo(teacherList.get(i + 1).getId()) > 0) {
-                    swap = true;
-                    Teacher temp = teacherList.get(i + 1);
-                    teacherList.set(i + 1, teacherList.get(i));
-                    teacherList.set(i, temp);
-                }
-            }
-        }
-    }
-
-
     public void displayAllTeacher() {
         if (teacherList.isEmpty()) {
             System.err.println("Chưa có dữ liệu, mời bạn nhập dữ liệu");
@@ -53,6 +36,19 @@ public class TeacherService implements ITeacher {
     public void addTeacher() {
         Teacher teacher = this.infoTeacher();
         teacherList.add(teacher);
+        boolean swap = true;
+        for (int k = 0; k < teacherList.size() - 1 && swap; k++) {
+            swap = false;
+            for (int i = 0; i < teacherList.size() - 1 - k; i++) {
+
+                if (teacherList.get(i).getId().compareTo(teacherList.get(i + 1).getId()) > 0) {
+                    swap = true;
+                    Teacher temp = teacherList.get(i + 1);
+                    teacherList.set(i + 1, teacherList.get(i));
+                    teacherList.set(i, temp);
+                }
+            }
+        }
         System.out.println("Thêm mới học sinh thành công");
     }
 

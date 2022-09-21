@@ -1,6 +1,7 @@
 package ss11_map_tree.product_management.service.impl;
 
 
+
 import ss11_map_tree.product_management.model.Product;
 import ss11_map_tree.product_management.service.IProduct;
 
@@ -11,14 +12,27 @@ public class ProductService implements IProduct {
     private static final List<Product> products = new ArrayList<>();
 
     static {
-        products.add(new Product(1, "Iphone", 120000));
-        products.add(new Product(2, "Samsung", 300000));
+        products.add(new Product("SV-2","Iphone", 120000));
+        products.add(new Product("SV-1","Samsung", 300000));
     }
 
 
     public void addProduct() {
         Product product = this.infoProduct();
         products.add(product);
+        boolean swap = true;
+        for (int k = 0; k < products.size() - 1 && swap; k++) {
+            swap = false;
+            for (int i = 0; i < products.size() - 1 - k; i++) {
+
+                if (products.get(i).getId().compareTo(products.get(i + 1).getId()) > 0) {
+                    swap = true;
+                    Product temp = products.get(i + 1);
+                    products.set(i + 1, products.get(i));
+                    products.set(i, temp);
+                }
+            }
+        }
         System.out.println("Thêm mới thành công");
     }
 
@@ -47,7 +61,7 @@ public class ProductService implements IProduct {
 
     public Product findProduct() {
         System.out.println("Mời bạn nhập vào id cần xóa");
-        int id = Integer.parseInt(scanner.nextLine());
+        String id = scanner.nextLine();
         for (Product product : products) {
             if (product.getId() == id) {
                 return product;
@@ -57,25 +71,23 @@ public class ProductService implements IProduct {
     }
 
     public Product infoProduct() {
-        System.out.print("Mời bạn nhập id: ");
-        int id = Integer.parseInt(scanner.nextLine());
+        String id = "SV-" + (products.size() + 1);
         System.out.print("Mời bạn nhập tên sản phẩm: ");
         String name = scanner.nextLine();
         System.out.print("Mời bạn nhập giá: ");
         int price = Integer.parseInt(scanner.nextLine());
-        return new Product(id, name, price);
+        return new Product(id,name, price);
     }
 
     public void editProduct() {
         System.out.println("Nhập ID sản phẩm cần chỉnh sửa: ");
-        int idEdit = Integer.parseInt(scanner.nextLine());
+        String idEdit = scanner.nextLine();
         Product temp = null;
         Product product1 = null;
         for (Product product : products) {
-            if (idEdit == product.getId()) {
+            if (idEdit == product.getName()) {
                 temp = product;
-                System.out.println("Nhập chỉnh sửa ID sản phẩm: ");
-                int setId = Integer.parseInt(scanner.nextLine());
+                String setId = "SV-" + (products.size() + 1);
 
                 System.out.println("Nhập chỉnh sửa tên của sản phẩm: ");
                 String setName = scanner.nextLine();
@@ -83,7 +95,7 @@ public class ProductService implements IProduct {
                 System.out.println("Nhập chỉnh sửa giá của sản phẩm: ");
                 int setPrice = (int) scanner.nextDouble();
 
-                product1 = new Product(setId, setName, setPrice);
+                product1 = new Product(setId,setName, setPrice);
                 break;
             }
         }

@@ -19,7 +19,6 @@ public class TeacherController {
             System.out.println("3. Cập nhật thông tin giáo viên");
             System.out.println("4. Xóa giáo viên");
             System.out.println("5. Tìm giáo viên");
-            System.out.println("6. Sắp xếp giáo viên");
             System.out.println("7. Exit");
             System.out.print("Mời bạn nhập chức năng 1->5: ");
             int choice = Integer.parseInt(scanner.nextLine());
@@ -40,8 +39,6 @@ public class TeacherController {
                     iTeacherService.search();
                     break;
                 case 6:
-                    iTeacherService.sortTeacher();
-                case 7:
                     return;
                 default:
                     System.out.println("Lựa chọn bạn nhập không đúng!");

@@ -23,21 +23,6 @@ public class StudentService implements IStudent {
         studentList.add(new Student("SV-1", "Nguyễn Văn A", LocalDate.parse("1998-12-04"), "Nữ", 10, "C06"));
     }
 
-    public void sortStudent() {
-        boolean swap = true;
-        for (int k = 0; k < studentList.size() - 1 && swap; k++) {
-            swap = false;
-            for (int i = 0; i < studentList.size() - 1 - k; i++) {
-
-                if (studentList.get(i).getId().compareTo(studentList.get(i + 1).getId()) > 0) {
-                    swap = true;
-                    Student temp = studentList.get(i + 1);
-                    studentList.set(i + 1, studentList.get(i));
-                    studentList.set(i, temp);
-                }
-            }
-        }
-    }
 
     @Override
     public void displayAllStudent() {
@@ -53,8 +38,20 @@ public class StudentService implements IStudent {
     @Override
     public void addStudent() {
         Student student = this.infoStudent();
-        System.out.println("Đã sắp xếp!");
         studentList.add(student);
+        boolean swap = true;
+        for (int k = 0; k < studentList.size() - 1 && swap; k++) {
+            swap = false;
+            for (int i = 0; i < studentList.size() - 1 - k; i++) {
+
+                if (studentList.get(i).getId().compareTo(studentList.get(i + 1).getId()) > 0) {
+                    swap = true;
+                    Student temp = studentList.get(i + 1);
+                    studentList.set(i + 1, studentList.get(i));
+                    studentList.set(i, temp);
+                }
+            }
+        }
         System.out.println("Thêm mới học sinh thành công");
     }
 
@@ -90,6 +87,7 @@ public class StudentService implements IStudent {
         String id = "SV-" + (studentList.size() + 1);
         System.out.print("Mời bạn nhập tên: ");
         String name = scanner.nextLine();
+
 
         LocalDate dateNow = LocalDate.now();
         LocalDate dateOfBirth;

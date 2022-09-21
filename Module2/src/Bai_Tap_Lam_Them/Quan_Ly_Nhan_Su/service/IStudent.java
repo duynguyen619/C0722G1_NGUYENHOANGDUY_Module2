@@ -10,6 +10,5 @@ public interface IStudent {
     void displayAllStudent() throws IOException;
     void removeStudent() throws IOException;
     void search();
-    void sortStudent() throws IOException;
     void editStudent() throws IOException;
 }

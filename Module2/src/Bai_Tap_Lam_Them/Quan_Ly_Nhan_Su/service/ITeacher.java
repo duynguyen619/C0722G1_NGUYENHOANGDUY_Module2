@@ -10,7 +10,5 @@ public interface ITeacher {
     void displayAllTeacher() throws IOException;
 
     void search();
-
-    void sortTeacher() throws IOException;
     void editTeacher() throws IOException;
 }

@@ -3,7 +3,7 @@ package Bai_Tap_Lam_Them.Quan_Ly_Nhan_Su.controller;
 import java.util.Scanner;
 
 public class PersonnelController {
-    public void menuManagement() {
+    public void menuManagement(){
             Scanner scanner = new Scanner(System.in);
             TeacherController teacherController = new TeacherController();
             StudentController studentController = new StudentController();

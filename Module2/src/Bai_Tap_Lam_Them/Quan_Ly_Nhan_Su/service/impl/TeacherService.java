@@ -8,6 +8,7 @@ import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class TeacherService implements ITeacher {
@@ -16,24 +17,28 @@ public class TeacherService implements ITeacher {
     private static final Scanner scanner = new Scanner(System.in);
     private static final List<Teacher> teacherList = new ArrayList<>();
 
-
-//    static {
-//        teacherList.add(new Teacher(2, "Lương Thị Thanh Thủy", "22/12/1999", "Nữ", "Đại học"));
-//        teacherList.add(new Teacher(3, "Nguyễn Hoàng Duy", "06/062001", "Nam", "Cao đẳng"));
-//        teacherList.add(new Teacher(1, "Hoàng Vân Anh", "13/13/1313", "Nam", "Trung cấp"));
-//    }
+    static {
+        teacherList.add(new Teacher("GV-2", "Lương Thị Thanh Thủy", LocalDate.parse("1999-01-01"), "Nữ", "Đại học"));
+        teacherList.add(new Teacher("GV-3", "Nguyễn Hoàng Duy", LocalDate.parse("2001-06-06"), "Nam", "Cao đẳng"));
+        teacherList.add(new Teacher("GV-1", "Hoàng Vân Anh", LocalDate.parse("1998-12-13"), "Nam", "Trung cấp"));
+    }
 
     public void sortTeacher() {
-        for (int i = 1; i < teacherList.size(); i++) {
-            Teacher temp1 = teacherList.get(i);
-            int j;
-            for (j = i - 1; j >= 0 && teacherList.get(j).getName().compareTo(temp1.getName()) < 0; j--) {
-                teacherList.set(j + 1, teacherList.get(j));
+        boolean swap = true;
+        for (int k = 0; k < teacherList.size() - 1 && swap; k++) {
+            swap = false;
+            for (int i = 0; i < teacherList.size() - 1 - k; i++) {
+
+                if (teacherList.get(i).getId().compareTo(teacherList.get(i + 1).getId()) > 0) {
+                    swap = true;
+                    Teacher temp = teacherList.get(i + 1);
+                    teacherList.set(i + 1, teacherList.get(i));
+                    teacherList.set(i, temp);
+                }
             }
-            teacherList.set(j + 1, temp1);
         }
-        System.out.println("Đã sắp xếp!");
     }
+
 
     public void displayAllTeacher() {
         if (teacherList.isEmpty()) {
@@ -72,7 +77,7 @@ public class TeacherService implements ITeacher {
         System.out.println("Mời bạn nhập vào id cần xóa: ");
         String id = scanner.nextLine();
         for (Teacher teacher : teacherList) {
-            if (teacher.getId() == id) {
+            if (Objects.equals(teacher.getId(), id)) {
                 return teacher;
             }
         }
@@ -83,9 +88,9 @@ public class TeacherService implements ITeacher {
         String id = "GV-" + (teacherList.size() + 1);
         System.out.print("Mời bạn nhập tên: ");
         String name = scanner.nextLine();
+
         LocalDate dateNow = LocalDate.now();
-        boolean check;
-        LocalDate dateOfBirth = null;
+        LocalDate dateOfBirth;
         do {
             System.out.println("nhập ngay sinh theo dd/MM/yyyy");
             String day = scanner.nextLine();
@@ -95,9 +100,8 @@ public class TeacherService implements ITeacher {
                 System.err.println("bạn đã nhập đúng ");
                 break;
             }
-            check = false;
             System.err.println("bạn đã nhập sai yêu cầu nhâp lại ");
-        } while (!check);
+        } while (true);
         System.out.print("Mời bạn giới tính: ");
         String gender = "";
         do {
@@ -117,9 +121,6 @@ public class TeacherService implements ITeacher {
                     break;
                 case "3":
                     gender = "LGBT";
-                    break;
-                case "4":
-                    gender = "Giới tính khác";
                     break;
                 default:
                     System.err.println("yêu cầu nhập đúng số hiển thị chức năng ");
@@ -157,17 +158,17 @@ public class TeacherService implements ITeacher {
     }
 
     public void search() {
-        System.out.print("Nhập tên: ");
-        String name = scanner.nextLine();
+        System.out.print("Nhập id giáo viên: ");
+        String id = scanner.nextLine();
         int count = 0;
         for (Teacher teacher : teacherList) {
-            if (name.contains(teacher.getName())) {
+            if (id.contains(teacher.getId())) {
                 System.out.println(teacher);
                 count++;
             }
         }
         if (count == 0) {
-            System.err.println("Không có tên giáo viên");
+            System.err.println("Không tìm thấy giáo viên");
         }
     }
 
@@ -182,8 +183,7 @@ public class TeacherService implements ITeacher {
                 String name = scanner.nextLine();
 
                 LocalDate dateNow = LocalDate.now();
-                boolean check;
-                LocalDate dateOfBirth = null;
+                LocalDate dateOfBirth;
                 do {
                     System.out.println("nhập ngay sinh theo dd/MM/yyyy");
                     String day = scanner.nextLine();
@@ -193,9 +193,8 @@ public class TeacherService implements ITeacher {
                         System.err.println("bạn đã nhập đúng ");
                         break;
                     }
-                    check = false;
                     System.err.println("bạn đã nhập sai yêu cầu nhâp lại ");
-                } while (!check);
+                } while (true);
 
                 System.out.print("Mời bạn giới tính: ");
                 String gender = "";
@@ -216,9 +215,6 @@ public class TeacherService implements ITeacher {
                             break;
                         case "3":
                             gender = "LGBT";
-                            break;
-                        case "4":
-                            gender = "Giới tính khác";
                             break;
                         default:
                             System.err.println("yêu cầu nhập đúng số hiển thị chức năng ");

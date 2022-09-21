@@ -4,34 +4,39 @@ package Bai_Tap_Lam_Them.Quan_Ly_Nhan_Su.service.impl;
 import Bai_Tap_Lam_Them.Quan_Ly_Nhan_Su.model.Student;
 import Bai_Tap_Lam_Them.Quan_Ly_Nhan_Su.service.IStudent;
 
+
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class StudentService implements IStudent {
     private static final Scanner scanner = new Scanner(System.in);
     private static final List<Student> studentList = new ArrayList<>();
 
-
-//    static {
-//        studentList.add(new Student(2, "Nguyễn Văn B","2001/06/06", "Nam", 10, "C06"));
-//        studentList.add(new Student(1, "Nguyễn Văn C", "1999/03/02", "Nữ", 10, "C06"));
-//        studentList.add(new Student(3, "Nguyễn Văn A", "1998/12/04", "Nữ", 10, "C06"));
-//    }
+    static {
+        studentList.add(new Student("SV-2", "Nguyễn Văn B", LocalDate.parse("2001-06-06"), "Nam", 10, "C06"));
+        studentList.add(new Student("SV-3", "Nguyễn Văn C", LocalDate.parse("1999-03-02"), "Nữ", 10, "C06"));
+        studentList.add(new Student("SV-1", "Nguyễn Văn A", LocalDate.parse("1998-12-04"), "Nữ", 10, "C06"));
+    }
 
     public void sortStudent() {
-        for (int i = 1; i < studentList.size(); i++) {
-            Student temp1 = studentList.get(i);
-            int j;
-            for (j = i - 1; j >= 0 && studentList.get(j).getName().compareTo(temp1.getName()) < 0; j--) {
-                studentList.set(j + 1, studentList.get(j));
+        boolean swap = true;
+        for (int k = 0; k < studentList.size() - 1 && swap; k++) {
+            swap = false;
+            for (int i = 0; i < studentList.size() - 1 - k; i++) {
+
+                if (studentList.get(i).getId().compareTo(studentList.get(i + 1).getId()) > 0) {
+                    swap = true;
+                    Student temp = studentList.get(i + 1);
+                    studentList.set(i + 1, studentList.get(i));
+                    studentList.set(i, temp);
+                }
             }
-            studentList.set(j + 1, temp1);
         }
-        System.out.println("Đã sắp xếp!");
     }
 
     @Override
@@ -48,6 +53,7 @@ public class StudentService implements IStudent {
     @Override
     public void addStudent() {
         Student student = this.infoStudent();
+        System.out.println("Đã sắp xếp!");
         studentList.add(student);
         System.out.println("Thêm mới học sinh thành công");
     }
@@ -73,7 +79,7 @@ public class StudentService implements IStudent {
         System.out.println("Mời bạn nhập vào id cần xóa: ");
         String id = scanner.nextLine();
         for (Student student : studentList) {
-            if (student.getId() == id) {
+            if (Objects.equals(student.getId(), id)) {
                 return student;
             }
         }
@@ -84,9 +90,9 @@ public class StudentService implements IStudent {
         String id = "SV-" + (studentList.size() + 1);
         System.out.print("Mời bạn nhập tên: ");
         String name = scanner.nextLine();
+
         LocalDate dateNow = LocalDate.now();
-        boolean check;
-        LocalDate dateOfBirth = null;
+        LocalDate dateOfBirth;
         do {
             System.out.println("nhập ngay sinh theo dd/MM/yyyy");
             String day = scanner.nextLine();
@@ -96,9 +102,8 @@ public class StudentService implements IStudent {
                 System.err.println("bạn đã nhập đúng ");
                 break;
             }
-            check = false;
             System.err.println("bạn đã nhập sai yêu cầu nhâp lại ");
-        } while (!check);
+        } while (true);
         System.out.print("Mời bạn giới tính: ");
         String gender = "";
         do {
@@ -130,17 +135,17 @@ public class StudentService implements IStudent {
     }
 
     public void search() {
-        System.out.print("Nhập tên: ");
-        String name = scanner.nextLine();
+        System.out.print("Nhập id học sinh: ");
+        String id = scanner.nextLine();
         int count = 0;
         for (Student student : studentList) {
-            if (name.contains(student.getName())) {
+            if (id.contains(student.getId())) {
                 System.out.println(student);
                 count++;
             }
         }
         if (count == 0) {
-            System.err.println("Không có tên học sinh");
+            System.err.println("Không tìm thấy học sinh");
         }
     }
 
@@ -155,8 +160,7 @@ public class StudentService implements IStudent {
                 String name = scanner.nextLine();
 
                 LocalDate dateNow = LocalDate.now();
-                boolean check;
-                LocalDate dateOfBirth = null;
+                LocalDate dateOfBirth;
                 do {
                     System.out.println("nhập ngay sinh theo dd/MM/yyyy");
                     String day = scanner.nextLine();
@@ -166,9 +170,8 @@ public class StudentService implements IStudent {
                         System.err.println("bạn đã nhập đúng ");
                         break;
                     }
-                    check = false;
                     System.err.println("bạn đã nhập sai yêu cầu nhâp lại ");
-                } while (!check);
+                } while (true);
 
                 System.out.print("Mời bạn giới tính: ");
                 String gender = "";

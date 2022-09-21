@@ -12,8 +12,8 @@ public class ProductService implements IProduct {
     private static final List<Product> products = new ArrayList<>();
 
     static {
-        products.add(new Product("SV-2","Iphone", 120000));
-        products.add(new Product("SV-1","Samsung", 300000));
+        products.add(new Product("SV-2","Iphone", 120000.0));
+        products.add(new Product("SV-1","Samsung", 300000.0));
     }
 
 
@@ -25,7 +25,7 @@ public class ProductService implements IProduct {
             swap = false;
             for (int i = 0; i < products.size() - 1 - k; i++) {
 
-                if (products.get(i).getId().compareTo(products.get(i + 1).getId()) > 0) {
+                if (products.get(i).getPrice().compareTo(products.get(i + 1).getPrice()) > 0) {
                     swap = true;
                     Product temp = products.get(i + 1);
                     products.set(i + 1, products.get(i));
@@ -63,7 +63,7 @@ public class ProductService implements IProduct {
         System.out.println("Mời bạn nhập vào id cần xóa");
         String id = scanner.nextLine();
         for (Product product : products) {
-            if (product.getId() == id) {
+            if (Objects.equals(product.getId(), id)) {
                 return product;
             }
         }
@@ -75,7 +75,7 @@ public class ProductService implements IProduct {
         System.out.print("Mời bạn nhập tên sản phẩm: ");
         String name = scanner.nextLine();
         System.out.print("Mời bạn nhập giá: ");
-        int price = Integer.parseInt(scanner.nextLine());
+        Double price = Double.valueOf(scanner.nextLine());
         return new Product(id,name, price);
     }
 
@@ -85,7 +85,7 @@ public class ProductService implements IProduct {
         Product temp = null;
         Product product1 = null;
         for (Product product : products) {
-            if (idEdit == product.getName()) {
+            if (Objects.equals(idEdit, product.getName())) {
                 temp = product;
                 String setId = "SV-" + (products.size() + 1);
 
@@ -93,7 +93,7 @@ public class ProductService implements IProduct {
                 String setName = scanner.nextLine();
 
                 System.out.println("Nhập chỉnh sửa giá của sản phẩm: ");
-                int setPrice = (int) scanner.nextDouble();
+                Double setPrice = scanner.nextDouble();
 
                 product1 = new Product(setId,setName, setPrice);
                 break;

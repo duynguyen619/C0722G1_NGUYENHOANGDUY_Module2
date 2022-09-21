@@ -3,9 +3,9 @@ package ss11_map_tree.product_management.model;
 public class Product {
     private String id;
     private String name;
-    private int price;
+    private Double price;
 
-    public Product(String id, String name, int price) {
+    public Product(String id, String name, Double price) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -27,11 +27,11 @@ public class Product {
         this.name = name;
     }
 
-    public int getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 

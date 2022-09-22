@@ -2,6 +2,7 @@ package ss11_map_tree.product_management.service.impl;
 
 
 
+import Bai_Tap_Lam_Them.Quan_Ly_Nhan_Su.model.Student;
 import ss11_map_tree.product_management.model.Product;
 import ss11_map_tree.product_management.service.IProduct;
 
@@ -24,7 +25,6 @@ public class ProductService implements IProduct {
         for (int k = 0; k < products.size() - 1 && swap; k++) {
             swap = false;
             for (int i = 0; i < products.size() - 1 - k; i++) {
-
                 if (products.get(i).getPrice().compareTo(products.get(i + 1).getPrice()) > 0) {
                     swap = true;
                     Product temp = products.get(i + 1);

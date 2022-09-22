@@ -15,7 +15,7 @@ public class MainController {
     public void menuMangement() {
         while (true) {
             System.err.println("-----------------------------------------------------");
-            System.err.println("Chào mừng bạn đến với siêu thị của chúng tôi");
+            System.err.println("CHÀO MỪNG BẠN ĐẾN VỚI SIÊU THỊ CỦA CHÚNG TÔI");
             System.out.println("1.Hiển thị danh sách sản phẩm");
             System.out.println("2.Thêm mới sản phẩm");
             System.out.println("3.Cập nhật thông tin sản phẩm");

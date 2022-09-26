@@ -2,6 +2,7 @@ package Bai_Tap_Lam_Them.Quan_Ly_Nhan_Su.controller;
 
 import Bai_Tap_Lam_Them.Quan_Ly_Nhan_Su.service.impl.TeacherService;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class TeacherController {
@@ -10,7 +11,7 @@ public class TeacherController {
     };
 
 
-    public void managementTeacher() {
+    public void managementTeacher() throws IOException {
         while (true) {
             System.out.println("---------------------------------------------");
             System.out.println("Chào mừng bạn đến với hệ thống quản lí giáo viên");

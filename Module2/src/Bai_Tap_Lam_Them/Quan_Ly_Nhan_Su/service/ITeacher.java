@@ -1,12 +1,14 @@
 package Bai_Tap_Lam_Them.Quan_Ly_Nhan_Su.service;
 
+import java.io.IOException;
+
 public interface ITeacher {
-    void addTeacher() ;
+    void addTeacher() throws IOException ;
 
-    void removeTeacher();
+    void removeTeacher() throws IOException;
 
-    void displayAllTeacher();
+    void displayAllTeacher() throws IOException;
 
     void search();
-    void editTeacher() ;
+    void editTeacher() throws IOException ;
 }

@@ -2,9 +2,7 @@ package Bai_Tap_Lam_Them.Quan_Ly_Nhan_Su.service.impl;
 
 import Bai_Tap_Lam_Them.Quan_Ly_Nhan_Su.model.Teacher;
 import Bai_Tap_Lam_Them.Quan_Ly_Nhan_Su.service.ITeacher;
-import sun.awt.HKSCS;
 
-import javax.naming.Name;
 import java.io.*;
 import java.time.LocalDate;
 import java.time.Period;
@@ -15,7 +13,7 @@ public class TeacherService implements ITeacher {
 
 
     private static final Scanner scanner = new Scanner(System.in);
-    private static  List<Teacher> teacherList;
+    private static List<Teacher> teacherList;
 
     static {
         try {
@@ -24,16 +22,13 @@ public class TeacherService implements ITeacher {
             e.printStackTrace();
         }
     }
+
     private static final String PATH_NAME_FILE_TEACHER = "src/Bai_Tap_Lam_Them/Quan_Ly_Nhan_Su/data/Teacher.txt";
 
     public void displayAllTeacher() throws IOException {
         teacherList = readTeacherFile("src/Bai_Tap_Lam_Them/Quan_Ly_Nhan_Su/data/Teacher.txt");
-        if (teacherList.isEmpty()) {
-            System.err.println("Chưa có dữ liệu, mời bạn nhập dữ liệu");
-        } else {
-            for (int i = 0; i < teacherList.size(); i++) {
-                System.out.println((1 + i) + ". " + teacherList.get(i));
-            }
+        for (Teacher teacher : teacherList) {
+            System.out.println(teacher);
         }
     }
 
@@ -53,6 +48,8 @@ public class TeacherService implements ITeacher {
                 }
             }
         }
+        teacherList.add(teacher);
+        writeTeachertFile("src/Bai_Tap_Lam_Them/Quan_Ly_Nhan_Su/data/Teacher.txt",teacherList);
         System.out.println("Thêm mới học sinh thành công");
     }
 
@@ -120,11 +117,12 @@ public class TeacherService implements ITeacher {
             }
         }
 
-        String dateOfBirth;
+        LocalDate dateOfBirth;
         while (true) {
             try {
                 System.out.print("Mời bạn nhập ngày sinh theo định dạng ngày/tháng/năm:  ");
-                dateOfBirth = scanner.nextLine();
+                String day = scanner.nextLine();
+                dateOfBirth = LocalDate.parse(day, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
                 break;
             } catch (IllegalAccessError e) {
                 System.out.println("Bạn nhập không đúng định dạng. Vui lòng nhập lại.");
@@ -158,7 +156,7 @@ public class TeacherService implements ITeacher {
                 System.out.println("Bạn nhập không hợp lệ");
             }
         }
-        Teacher teacher = new Teacher(id, name, LocalDate.parse(dateOfBirth), gender, specialize);
+        Teacher teacher = new Teacher(id, name, dateOfBirth, gender, specialize);
         System.out.println(teacher);
         return teacher;
     }
@@ -271,6 +269,7 @@ public class TeacherService implements ITeacher {
             }
         }
     }
+
     public static List<String> readFile(String path) throws IOException {
         File file = new File(path);
         FileReader fileReader = new FileReader(file);
@@ -290,11 +289,12 @@ public class TeacherService implements ITeacher {
         String[] info;
         for (String line : strings) {
             info = line.split(",");
-            teacherList.add(new Teacher(info[0], info[1], LocalDate.parse(info[2]),info[3],info[4]));
+            teacherList.add(new Teacher(info[0], info[1], LocalDate.parse(info[2]), info[3], info[4]));
         }
 
         return teachers;
     }
+
     private static void writeFile(String path, String data) throws IOException {
         File file = new File(path);
         BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));

@@ -3,8 +3,8 @@ package Bai_Tap_Lam_Them.Quan_Ly_Nhan_Su.model;
 import java.time.LocalDate;
 
 public class Student extends Personnel {
-    private  double point;
-    private  String nameClass;
+    private double point;
+    private String nameClass;
 
 
     public Student(String id, String name, LocalDate dateOfBirth, String gender, double point, String nameClass) {
@@ -31,9 +31,6 @@ public class Student extends Personnel {
 
     @Override
     public String toString() {
-        return "Student{" +
-                "point=" + point +
-                ", nameClass='" + nameClass + '\'' +
-                "} " + super.toString();
+        return String.format("%s,%s,%s", super.toString(), point, nameClass);
     }
 }

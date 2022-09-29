@@ -20,9 +20,6 @@ public class Teacher extends Personnel {
     }
 
     @Override
-    public String toString() {
-        return "Teacher{" +
-                "specialize='" + level + '\'' +
-                "} " + super.toString();
-    }
+    public String toString() {return String.format("%s", super.toString(),level);}
+
 }

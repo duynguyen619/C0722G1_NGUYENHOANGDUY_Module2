@@ -4,7 +4,6 @@ import java.io.IOException;
 
 public interface IStudent {
     void addStudent() throws IOException;
-
     void displayAllStudent();
     void removeStudent() throws IOException;
     void search();

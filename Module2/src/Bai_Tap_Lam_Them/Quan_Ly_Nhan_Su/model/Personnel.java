@@ -49,11 +49,7 @@ public class Personnel {
 
     @Override
     public String toString() {
-        return "Personnel{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", dateOfBirth=" + dateOfBirth +
-                ", gender='" + gender + '\'' +
-                '}';
+        return String.format("%s,%s,%s,%s", id, name, dateOfBirth, gender);
     }
+
 }

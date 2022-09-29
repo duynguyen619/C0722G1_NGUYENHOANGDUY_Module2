@@ -5,7 +5,6 @@ import Bai_Tap_Lam_Them.Quan_Ly_Nhan_Su.model.Student;
 import Bai_Tap_Lam_Them.Quan_Ly_Nhan_Su.service.IStudent;
 
 
-
 import java.io.*;
 import java.net.PortUnreachableException;
 import java.time.LocalDate;
@@ -24,24 +23,42 @@ public class StudentService implements IStudent {
             e.printStackTrace();
         }
     }
+
     private static final String PATH_NAME_FILE_STUDENT = "src/Bai_Tap_Lam_Them/Quan_Ly_Nhan_Su/data/Student.txt";
+
     @Override
     public void displayAllStudent() {
-        if (studentList.isEmpty()) {
-            System.err.println("Chưa có dữ liệu, mời bạn nhập dữ liệu");
-        } else {
-            for (int i = 0; i < studentList.size(); i++) {
-                System.out.println((1 + i) + ". " + studentList.get(i));
-            }
+        try {
+            studentList = readStudentFile("src/Bai_Tap_Lam_Them/Quan_Ly_Nhan_Su/data/Student.txt");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        for (Student student : studentList) {
+            System.out.println(student);
         }
     }
+
     @Override
     public void addStudent() throws IOException {
-        studentList = readStudentFile("src/Bai_Tap_Lam_Them/Quan_Ly_Nhan_Su/data/Student.txt");
         Student student = this.infoStudent();
         studentList.add(student);
+        boolean swap = true;
+        for (int k = 0; k < studentList.size() - 1 && swap; k++) {
+            swap = false;
+            for (int i = 0; i < studentList.size() - 1 - k; i++) {
+                if (studentList.get(i).getId().compareTo(studentList.get(i + 1).getId()) > 0) {
+                    swap = true;
+                    Student temp = studentList.get(i + 1);
+                    studentList.set(i + 1, studentList.get(i));
+                    studentList.set(i, temp);
+                }
+            }
+        }
+        studentList.add(student);
+        writeStudentFile("src/Bai_Tap_Lam_Them/Quan_Ly_Nhan_Su/data/Student.txt", studentList);
         System.out.println("Thêm mới học sinh thành công");
     }
+
     @Override
     public void removeStudent() throws IOException {
         studentList = readStudentFile("src/Bai_Tap_Lam_Them/Quan_Ly_Nhan_Su/data/Student.txt");
@@ -59,7 +76,8 @@ public class StudentService implements IStudent {
             }
         }
     }
-    private Student findStudent() throws IOException {
+
+    private Student findStudent() {
         System.out.println("Mời bạn nhập vào id cần xóa: ");
         String id = scanner.nextLine();
         for (Student student : studentList) {
@@ -69,7 +87,8 @@ public class StudentService implements IStudent {
         }
         return null;
     }
-    public void search(){
+
+    public void search() {
         try {
             studentList = readStudentFile("src/Bai_Tap_Lam_Them/Quan_Ly_Nhan_Su/data/Student.txt");
         } catch (IOException e) {
@@ -153,6 +172,7 @@ public class StudentService implements IStudent {
             }
         }
     }
+
     public Student infoStudent() {
         String id;
         while (true) {
@@ -176,20 +196,21 @@ public class StudentService implements IStudent {
 
         String name;
         while (true) {
+            System.out.print("Mời bạn nhập tên: ");
             name = scanner.nextLine();
-            if (name.toLowerCase().matches("[^\\D{5,50}\\s*$]")){
+            if (name.toLowerCase().matches("[A-Za-zvxyỳọáầảấờễàạằệếýộậốũứĩõúữịỗìềểẩớặòùồợãụủíỹắẫựỉỏừỷởóéửỵẳẹèẽổẵẻỡơôưăêâđ ]{5,50}")) {
                 break;
-            }else {
+            } else {
                 System.out.println("mời nhập lại");
             }
-
         }
 
-        String dateOfBirth;
+        LocalDate dateOfBirth;
         while (true) {
             try {
                 System.out.print("Mời bạn nhập ngày sinh theo định dạng ngày/tháng/năm:  ");
-                dateOfBirth = scanner.nextLine();
+                String day = scanner.nextLine();
+                dateOfBirth = LocalDate.parse(day, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
                 break;
             } catch (InputMismatchException e) {
                 System.out.println("Bạn nhập không đúng định dạng. Vui lòng nhập lại.");
@@ -198,7 +219,7 @@ public class StudentService implements IStudent {
             }
         }
 
-        String gender="";
+        String gender = "";
         while (true) {
             try {
                 System.out.print("Mời bạn nhập giới tính: ");
@@ -231,14 +252,15 @@ public class StudentService implements IStudent {
 
         String nameClass;
         while (true) {
+            System.out.print("Mời bạn tên lớp: ");
             nameClass = scanner.nextLine();
-            if (nameClass.matches("(A|C)[\\d]{4}(G|I)[1]")){
+            if (nameClass.matches("(A|C)[\\d]{4}(G|I)[1]")) {
                 break;
-            }else {
+            } else {
                 System.out.println("mời nhập lại");
             }
         }
-        Student student = new Student(id, name, LocalDate.parse(dateOfBirth), gender, point, nameClass);
+        Student student = new Student(id, name, dateOfBirth, gender, point, nameClass);
         System.out.println(student);
         return student;
     }
@@ -263,25 +285,23 @@ public class StudentService implements IStudent {
         String[] info;
         for (String line : strings) {
             info = line.split(",");
-            students.add(new Student(info[0], info[1],LocalDate.parse(info[2]),info[3],Double.parseDouble(info[4]),info[5]));
+            students.add(new Student(info[0], info[1], LocalDate.parse(info[2]), info[3], Double.parseDouble(info[4]), info[5]));
         }
-
         return students;
     }
+
     private static void writeFile(String path, String data) throws IOException {
         File file = new File(path);
         BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
         bufferedWriter.write(data);
         bufferedWriter.close();
     }
-
     public static void writeStudentFile(String path, List<Student> students) throws IOException {
-        String data = "";
+        String data = " ";
         for (Student student : students) {
             data += student.toString();
             data += "\n";
         }
-
         writeFile(path, data);
     }
 }
